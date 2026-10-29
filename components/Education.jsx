@@ -1,5 +1,5 @@
 import { educationData } from '@/lib/portfolio-data';
-import { GraduationCap, BookOpen, CheckCircle, Info } from 'lucide-react';
+import { GraduationCap, BookOpen, CheckCircle } from 'lucide-react';
 
 export default function Education() {
   return (
@@ -58,11 +58,11 @@ export default function Education() {
               ))}
             </div>
 
-            {/* Configurable note */}
+            {/* Academic Commitment Note */}
             <div className="mt-6 p-4 rounded-xl bg-[#0F131C] border border-border/60 flex items-start space-x-3 text-xs text-secondary">
-              <Info className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
+              <BookOpen className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
               <span>
-                Institution name and expected graduation milestones can be configured directly in <code className="text-accent font-mono">lib/portfolio-data.js</code> upon formal publishing.
+                Committed to continuous technical growth, blending formal academic theory in data structures and database systems with modern full-stack web engineering projects.
               </span>
             </div>
           </div>

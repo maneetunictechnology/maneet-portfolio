@@ -1,11 +1,13 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { X, ExternalLink, Github, CheckCircle2, AlertCircle, Sparkles, Layers, ArrowRight } from 'lucide-react';
 
 export default function ProjectModal({ project, isOpen, onClose }) {
+  const closeButtonRef = useRef(null);
+
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === 'Escape' && isOpen) {
@@ -16,6 +18,9 @@ export default function ProjectModal({ project, isOpen, onClose }) {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
       window.addEventListener('keydown', handleKeyDown);
+      setTimeout(() => {
+        closeButtonRef.current?.focus();
+      }, 50);
     } else {
       document.body.style.overflow = 'unset';
     }
@@ -30,7 +35,7 @@ export default function ProjectModal({ project, isOpen, onClose }) {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 lg:p-8 bg-black/80 backdrop-blur-sm overflow-y-auto animate-fade-in"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 lg:p-8 bg-black/80 backdrop-blur-sm overflow-hidden animate-fade-in"
       role="dialog"
       aria-modal="true"
       aria-labelledby="modal-project-title"
@@ -50,6 +55,7 @@ export default function ProjectModal({ project, isOpen, onClose }) {
           </div>
 
           <button
+            ref={closeButtonRef}
             type="button"
             onClick={onClose}
             className="p-1.5 rounded-lg text-secondary hover:text-primary hover:bg-[#1A212E] border border-border/60 transition-colors focus-visible:ring-2 focus-visible:ring-accent"

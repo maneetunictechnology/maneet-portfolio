@@ -26,9 +26,40 @@ export default function Contact() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setStatus('loading');
     setErrorMessage('');
     setSuccessMessage('');
+
+    // Client-side validation for instant feedback
+    const trimmedName = formData.name.trim();
+    if (!trimmedName || trimmedName.length < 2) {
+      setStatus('error');
+      setErrorMessage('Please enter your name (at least 2 characters).');
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const trimmedEmail = formData.email.trim();
+    if (!trimmedEmail || !emailRegex.test(trimmedEmail)) {
+      setStatus('error');
+      setErrorMessage('Please enter a valid email address.');
+      return;
+    }
+
+    const trimmedSubject = formData.subject.trim();
+    if (!trimmedSubject || trimmedSubject.length < 3) {
+      setStatus('error');
+      setErrorMessage('Please enter a subject (at least 3 characters).');
+      return;
+    }
+
+    const trimmedMessage = formData.message.trim();
+    if (!trimmedMessage || trimmedMessage.length < 10) {
+      setStatus('error');
+      setErrorMessage('Please enter a message with at least 10 characters.');
+      return;
+    }
+
+    setStatus('loading');
 
     try {
       const response = await fetch('/api/contact', {
@@ -36,10 +67,21 @@ export default function Contact() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          name: trimmedName,
+          email: trimmedEmail,
+          subject: trimmedSubject,
+          message: trimmedMessage,
+        }),
       });
 
-      const data = await response.json();
+      let data;
+      try {
+        data = await response.json();
+      } catch (parseErr) {
+        throw new Error('Server returned an unexpected response. Please use direct email.');
+      }
 
       if (!response.ok || !data.success) {
         throw new Error(data.error || 'Failed to send message. Please try email.');

@@ -18,7 +18,17 @@ export default function ProjectCard({ project, onOpenModal }) {
       {/* Project Thumbnail */}
       {project.heroImage && (
         <div
-          className={`relative w-full overflow-hidden border-b border-border bg-[#0A0D14] ${
+          onClick={() => onOpenModal(project)}
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              onOpenModal(project);
+            }
+          }}
+          aria-label={`Open case study for ${project.title}`}
+          className={`relative w-full overflow-hidden border-b border-border bg-[#0A0D14] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
             isPrimary
               ? 'aspect-[16/9] sm:aspect-[21/9] lg:aspect-[16/8]'
               : 'aspect-[16/9]'
@@ -65,7 +75,13 @@ export default function ProjectCard({ project, onOpenModal }) {
 
           {/* Title & Tagline */}
           <h3 className="text-xl sm:text-2xl font-bold text-primary group-hover:text-accent transition-colors">
-            {project.title}
+            <button
+              type="button"
+              onClick={() => onOpenModal(project)}
+              className="text-left hover:underline focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent rounded transition-colors"
+            >
+              {project.title}
+            </button>
           </h3>
           <p className="text-xs sm:text-sm font-medium text-accent/90 mt-1">{project.tagline}</p>
 

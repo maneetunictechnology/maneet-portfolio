@@ -20,12 +20,26 @@ import { personalInfo } from '@/lib/portfolio-data';
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
+
+      // Simple active section detection
+      const sections = ['home', 'about', 'skills', 'projects', 'education', 'journey', 'contact'];
+      const scrollPosition = window.scrollY + 120;
+
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const el = document.getElementById(sections[i]);
+        if (el && el.offsetTop <= scrollPosition) {
+          setActiveSection(sections[i]);
+          break;
+        }
+      }
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -40,13 +54,13 @@ export default function Navbar() {
   }, [isOpen]);
 
   const navLinks = [
-    { name: 'Home', href: '/#home', icon: Home },
-    { name: 'About', href: '/#about', icon: User },
-    { name: 'Experience', href: '/#journey', icon: Briefcase },
-    { name: 'Education', href: '/#education', icon: GraduationCap },
-    { name: 'Projects', href: '/#projects', icon: Code2 },
-    { name: 'Skills', href: '/#skills', icon: Sparkles },
-    { name: 'Contact', href: '/#contact', icon: Send },
+    { name: 'Home', href: '/#home', id: 'home', icon: Home },
+    { name: 'About', href: '/#about', id: 'about', icon: User },
+    { name: 'Skills', href: '/#skills', id: 'skills', icon: Sparkles },
+    { name: 'Projects', href: '/#projects', id: 'projects', icon: Code2 },
+    { name: 'Education', href: '/#education', id: 'education', icon: GraduationCap },
+    { name: 'Journey', href: '/#journey', id: 'journey', icon: Briefcase },
+    { name: 'Contact', href: '/#contact', id: 'contact', icon: Send },
   ];
 
   return (
@@ -83,13 +97,18 @@ export default function Navbar() {
           <div className="hidden lg:flex items-center bg-[#121622]/80 backdrop-blur-xl border border-white/[0.1] rounded-full px-3 py-1.5 shadow-xl shadow-black/40">
             {navLinks.map((link) => {
               const Icon = link.icon;
+              const isActive = activeSection === link.id;
               return (
                 <Link
                   key={link.name}
                   href={link.href}
-                  className="flex items-center space-x-1.5 px-3 py-1.5 text-xs font-medium text-secondary hover:text-primary hover:bg-white/[0.06] rounded-full transition-all"
+                  className={`flex items-center space-x-1.5 px-3 py-1.5 text-xs font-medium rounded-full transition-all ${
+                    isActive
+                      ? 'text-primary bg-white/[0.12] font-semibold shadow-sm'
+                      : 'text-secondary hover:text-primary hover:bg-white/[0.06]'
+                  }`}
                 >
-                  <Icon className="w-3.5 h-3.5 opacity-80" />
+                  <Icon className={`w-3.5 h-3.5 ${isActive ? 'text-accent' : 'opacity-80'}`} />
                   <span>{link.name}</span>
                 </Link>
               );
@@ -139,14 +158,19 @@ export default function Navbar() {
         >
           {navLinks.map((link) => {
             const Icon = link.icon;
+            const isActive = activeSection === link.id;
             return (
               <Link
                 key={link.name}
                 href={link.href}
                 onClick={() => setIsOpen(false)}
-                className="flex items-center space-x-2.5 px-4 py-2.5 text-sm font-medium text-secondary hover:text-primary hover:bg-white/[0.06] rounded-xl transition-colors"
+                className={`flex items-center space-x-2.5 px-4 py-2.5 text-sm font-medium rounded-xl transition-colors ${
+                  isActive
+                    ? 'text-primary bg-white/[0.12] font-semibold'
+                    : 'text-secondary hover:text-primary hover:bg-white/[0.06]'
+                }`}
               >
-                <Icon className="w-4 h-4 text-accent" />
+                <Icon className={`w-4 h-4 ${isActive ? 'text-accent' : 'text-accent/70'}`} />
                 <span>{link.name}</span>
               </Link>
             );

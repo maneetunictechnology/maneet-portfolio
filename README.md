@@ -105,6 +105,11 @@ All personal details, skills, projects, and education data are centralized in a 
    npm run start
    ```
 
+5. **Generate PDF resume**:
+   ```bash
+   npm run generate:pdf
+   ```
+
 ---
 
 ## 🚢 Deployment to Vercel

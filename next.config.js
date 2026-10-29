@@ -6,6 +6,10 @@ const nextConfig = {
     formats: ['image/avif', 'image/webp'],
   },
   poweredByHeader: false,
+  webpack: (config) => {
+    config.cache = false;
+    return config;
+  },
 };
 
 module.exports = nextConfig;

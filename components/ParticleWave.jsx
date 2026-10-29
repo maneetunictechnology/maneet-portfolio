@@ -12,15 +12,37 @@ export default function ParticleWave() {
     if (!ctx) return;
 
     let animationFrameId;
-    let width = (canvas.width = canvas.offsetWidth);
-    let height = (canvas.height = canvas.offsetHeight);
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    let width = canvas.offsetWidth || window.innerWidth || 1200;
+    let height = canvas.offsetHeight || window.innerHeight || 800;
+
+    canvas.width = width * dpr;
+    canvas.height = height * dpr;
+    ctx.scale(dpr, dpr);
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     const handleResize = () => {
       if (!canvas) return;
-      width = canvas.width = canvas.offsetWidth;
-      height = canvas.height = canvas.offsetHeight;
+      width = canvas.offsetWidth || window.innerWidth || 1200;
+      height = canvas.offsetHeight || window.innerHeight || 800;
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      ctx.scale(dpr, dpr);
+      if (prefersReducedMotion) {
+        render();
+      }
     };
     window.addEventListener('resize', handleResize);
+
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        if (animationFrameId) cancelAnimationFrame(animationFrameId);
+      } else if (!prefersReducedMotion) {
+        render();
+      }
+    };
+    document.addEventListener('visibilitychange', handleVisibilityChange);
 
     // Particle Cloud configuration
     const PARTICLE_COUNT = 75;
@@ -105,14 +127,17 @@ export default function ParticleWave() {
         }
       }
 
-      animationFrameId = requestAnimationFrame(render);
+      if (!prefersReducedMotion) {
+        animationFrameId = requestAnimationFrame(render);
+      }
     };
 
     render();
 
     return () => {
       window.removeEventListener('resize', handleResize);
-      cancelAnimationFrame(animationFrameId);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      if (animationFrameId) cancelAnimationFrame(animationFrameId);
     };
   }, []);
 

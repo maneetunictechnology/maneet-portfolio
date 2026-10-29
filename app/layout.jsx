@@ -65,6 +65,13 @@ export const metadata = {
   },
 };
 
+export const viewport = {
+  themeColor: '#0B0D12',
+  colorScheme: 'dark',
+  width: 'device-width',
+  initialScale: 1,
+};
+
 export default function RootLayout({ children }) {
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -72,13 +79,14 @@ export default function RootLayout({ children }) {
     name: personalInfo.name,
     jobTitle: personalInfo.role,
     email: personalInfo.email,
-    sameAs: [personalInfo.github],
+    url: 'https://maneet-portfolio.vercel.app',
+    sameAs: [personalInfo.github].filter(Boolean),
     knowsAbout: ['HTML', 'CSS', 'JavaScript', 'React', 'Next.js', 'Node.js', 'MongoDB', 'Web Development'],
     description: personalInfo.about.intro,
   };
 
   return (
-    <html lang="en" className="dark scroll-smooth">
+    <html lang="en" className="dark scroll-smooth scroll-pt-24">
       <head>
         <script
           type="application/ld+json"

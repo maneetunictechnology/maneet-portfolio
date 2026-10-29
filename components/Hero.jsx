@@ -5,6 +5,7 @@ import {
   ArrowRight,
   Mail,
   Github,
+  Linkedin,
   FileText,
   ExternalLink,
   Code2,
@@ -90,6 +91,18 @@ export default function Hero() {
               >
                 <Github className="w-4 h-4 group-hover:scale-110 transition-transform" />
               </a>
+
+              {personalInfo.linkedin && (
+                <a
+                  href={personalInfo.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-xl bg-[#121622]/90 border border-white/[0.1] hover:border-accent/50 flex items-center justify-center text-secondary hover:text-white transition-all shadow-sm group"
+                  aria-label="Maneet's LinkedIn profile"
+                >
+                  <Linkedin className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                </a>
+              )}
 
               <a
                 href={`mailto:${personalInfo.email}`}

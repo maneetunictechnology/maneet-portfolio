@@ -40,6 +40,15 @@ function sanitizeText(str) {
     .trim();
 }
 
+export async function OPTIONS() {
+  return new NextResponse(null, {
+    status: 204,
+    headers: {
+      Allow: 'POST, OPTIONS',
+    },
+  });
+}
+
 export async function POST(request) {
   try {
     const ip =
@@ -58,8 +67,17 @@ export async function POST(request) {
       );
     }
 
-    const body = await request.json();
-    const { name, email, subject, message, _gotcha } = body;
+    let body;
+    try {
+      body = await request.json();
+    } catch {
+      return NextResponse.json(
+        { success: false, error: 'Invalid JSON request payload.' },
+        { status: 400 }
+      );
+    }
+
+    const { name, email, subject, message, _gotcha } = body || {};
 
     // Honeypot check for bots
     if (_gotcha) {

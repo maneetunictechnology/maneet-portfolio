@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { ArrowUp, Github, Mail, Heart, FileText } from 'lucide-react';
+import { ArrowUp, Github, Linkedin, Mail, Heart, FileText } from 'lucide-react';
 import { personalInfo } from '@/lib/portfolio-data';
 
 export default function Footer() {
@@ -39,6 +39,17 @@ export default function Footer() {
               >
                 <Github className="w-4 h-4" />
               </a>
+              {personalInfo.linkedin && (
+                <a
+                  href={personalInfo.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 rounded-lg bg-[#11151D] border border-border text-secondary hover:text-primary hover:border-accent/40 transition-colors"
+                  aria-label="Maneet's LinkedIn profile"
+                >
+                  <Linkedin className="w-4 h-4" />
+                </a>
+              )}
               <Link
                 href="/resume"
                 className="p-2 rounded-lg bg-[#11151D] border border-border text-secondary hover:text-accent hover:border-accent/40 transition-colors"
@@ -78,6 +89,11 @@ export default function Footer() {
               <li>
                 <Link href="/#education" className="hover:text-primary transition-colors">
                   Education &amp; Background
+                </Link>
+              </li>
+              <li>
+                <Link href="/#journey" className="hover:text-primary transition-colors">
+                  Development Journey
                 </Link>
               </li>
               <li>
@@ -129,13 +145,13 @@ export default function Footer() {
             &copy; {currentYear} Maneet. Developed with Next.js, React &amp; Tailwind CSS.
           </p>
 
-          <a
-            href="#home"
+          <Link
+            href="/#home"
             className="inline-flex items-center space-x-1.5 px-3.5 py-1.5 rounded-full bg-[#121622] border border-white/10 text-xs font-mono text-secondary hover:text-white hover:border-white/20 transition-all"
           >
             <span>Back to top</span>
             <ArrowUp className="w-3.5 h-3.5" />
-          </a>
+          </Link>
         </div>
       </div>
     </footer>
