@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="100%" height="100%" fill="none">
+  <defs>
+    <linearGradient id="bgDist" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0E131C"/>
+      <stop offset="100%" stop-color="#080A0F"/>
+    </linearGradient>
+    <linearGradient id="cardBgDist" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#151A24"/>
+      <stop offset="100%" stop-color="#11151D"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="675" fill="url(#bgDist)"/>
+
+  <!-- Subtle Network Grid -->
+  <g stroke="#282E3B" stroke-width="1" opacity="0.35">
+    <line x1="0" y1="135" x2="1200" y2="135"/>
+    <line x1="0" y1="270" x2="1200" y2="270"/>
+    <line x1="0" y1="405" x2="1200" y2="405"/>
+    <line x1="0" y1="540" x2="1200" y2="540"/>
+    <line x1="200" y1="0" x2="200" y2="675"/>
+    <line x1="600" y1="0" x2="600" y2="675"/>
+    <line x1="1000" y1="0" x2="1000" y2="675"/>
+  </g>
+
+  <!-- Window Frame -->
+  <rect x="80" y="60" width="1040" height="555" rx="16" fill="url(#cardBgDist)" stroke="#282E3B" stroke-width="2"/>
+  <rect x="80" y="60" width="1040" height="52" rx="16" fill="#0D1118"/>
+  <circle cx="115" cy="86" r="6" fill="#FF5F56"/>
+  <circle cx="135" cy="86" r="6" fill="#FFBD2E"/>
+  <circle cx="155" cy="86" r="6" fill="#27C93F"/>
+  <text x="200" y="91" fill="#A4ACBC" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="13" font-weight="600" letter-spacing="1">PRODUCT DISTRIBUTION ENGINE // MULTI-CHANNEL SYNDICATION</text>
+
+  <!-- Flow Visual -->
+  <g transform="translate(110, 140)">
+    <!-- Node 1: Master Catalog Hub -->
+    <rect x="0" y="50" width="240" height="300" rx="12" fill="#0B0E14" stroke="#8B9CFF" stroke-width="1.5"/>
+    <text x="25" y="85" fill="#8B9CFF" font-family="sans-serif" font-size="14" font-weight="bold">Master Catalog Hub</text>
+    <text x="25" y="105" fill="#A4ACBC" font-family="sans-serif" font-size="11">Single source of truth</text>
+
+    <rect x="20" y="130" width="200" height="45" rx="6" fill="#151A24" stroke="#282E3B"/>
+    <text x="35" y="157" fill="#F5F7FB" font-family="monospace" font-size="11">SKU-7721: Core Specs</text>
+
+    <rect x="20" y="190" width="200" height="45" rx="6" fill="#151A24" stroke="#282E3B"/>
+    <text x="35" y="217" fill="#F5F7FB" font-family="monospace" font-size="11">SKU-7722: Multi-Images</text>
+
+    <rect x="20" y="250" width="200" height="45" rx="6" fill="#151A24" stroke="#282E3B"/>
+    <text x="35" y="277" fill="#F5F7FB" font-family="monospace" font-size="11">SKU-7723: Pricing Matrix</text>
+
+    <!-- Connector Arrows -->
+    <path d="M 240 200 L 370 200" stroke="#70E1C1" stroke-width="2" stroke-dasharray="6,4"/>
+    <polygon points="370,195 385,200 370,205" fill="#70E1C1"/>
+
+    <!-- Node 2: Transformation Engine -->
+    <rect x="385" y="30" width="250" height="340" rx="12" fill="#0D1117" stroke="#70E1C1" stroke-width="1.5"/>
+    <text x="405" y="65" fill="#70E1C1" font-family="sans-serif" font-size="14" font-weight="bold">Attribute Transformation</text>
+    <text x="405" y="85" fill="#A4ACBC" font-family="sans-serif" font-size="11">Rule-based mapping engine</text>
+
+    <rect x="400" y="110" width="220" height="60" rx="8" fill="#151A24" stroke="#282E3B"/>
+    <text x="415" y="135" fill="#8B9CFF" font-family="sans-serif" font-size="11" font-weight="bold">Taxonomy Alignment</text>
+    <text x="415" y="155" fill="#A4ACBC" font-family="sans-serif" font-size="10">Internal → Marketplace Tree</text>
+
+    <rect x="400" y="185" width="220" height="60" rx="8" fill="#151A24" stroke="#282E3B"/>
+    <text x="415" y="210" fill="#8B9CFF" font-family="sans-serif" font-size="11" font-weight="bold">Title &amp; Bullet Formatting</text>
+    <text x="415" y="230" fill="#A4ACBC" font-family="sans-serif" font-size="10">Character length validation</text>
+
+    <rect x="400" y="260" width="220" height="60" rx="8" fill="#151A24" stroke="#282E3B"/>
+    <text x="415" y="285" fill="#70E1C1" font-family="sans-serif" font-size="11" font-weight="bold">Completeness Check: 100%</text>
+    <text x="415" y="305" fill="#A4ACBC" font-family="sans-serif" font-size="10">Zero missing attributes</text>
+
+    <!-- Connector Arrows Out -->
+    <path d="M 635 200 L 755 200" stroke="#8B9CFF" stroke-width="2" stroke-dasharray="6,4"/>
+    <polygon points="755,195 770,200 755,205" fill="#8B9CFF"/>
+
+    <!-- Node 3: Target Channels Outputs -->
+    <g transform="translate(770, 40)">
+      <rect x="0" y="0" width="210" height="90" rx="8" fill="#0B0E14" stroke="#282E3B"/>
+      <text x="15" y="30" fill="#F5F7FB" font-family="sans-serif" font-size="12" font-weight="bold">Channel Feed: JSON</text>
+      <text x="15" y="55" fill="#70E1C1" font-family="monospace" font-size="11">Ready for Sync</text>
+      <circle cx="185" cy="45" r="8" fill="#70E1C1" fill-opacity="0.2"/>
+
+      <rect x="0" y="110" width="210" height="90" rx="8" fill="#0B0E14" stroke="#282E3B"/>
+      <text x="15" y="140" fill="#F5F7FB" font-family="sans-serif" font-size="12" font-weight="bold">Channel Feed: CSV</text>
+      <text x="15" y="165" fill="#8B9CFF" font-family="monospace" font-size="11">Standard Feed</text>
+      <circle cx="185" cy="155" r="8" fill="#8B9CFF" fill-opacity="0.2"/>
+
+      <rect x="0" y="220" width="210" height="90" rx="8" fill="#0B0E14" stroke="#282E3B"/>
+      <text x="15" y="250" fill="#F5F7FB" font-family="sans-serif" font-size="12" font-weight="bold">Status: Prototype</text>
+      <text x="15" y="275" fill="#A4ACBC" font-family="sans-serif" font-size="11">Schema &amp; Workflows</text>
+    </g>
+  </g>
+</svg>
