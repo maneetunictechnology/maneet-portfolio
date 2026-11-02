@@ -124,6 +124,64 @@ html.lenis, html.lenis body {
   color: transparent;
 }
 
+/* Preloader Keyframe Animations */
+@keyframes floatUp {
+  0% {
+    transform: translateY(100vh) scale(0.8);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.6;
+  }
+  85% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-20vh) scale(1.1);
+    opacity: 0;
+  }
+}
+
+@keyframes scanline {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(1000%);
+  }
+}
+
+@keyframes cyberGlitch {
+  0%, 100% {
+    transform: translate(0);
+    filter: drop-shadow(0 0 15px rgba(199, 255, 74, 0.4));
+  }
+  20% {
+    transform: translate(-2px, 1px);
+    filter: drop-shadow(2px 0 20px rgba(74, 222, 128, 0.6));
+  }
+  40% {
+    transform: translate(2px, -1px);
+    filter: drop-shadow(-2px 0 25px rgba(199, 255, 74, 0.7));
+  }
+  60% {
+    transform: translate(-1px, -1px);
+  }
+  80% {
+    transform: translate(1px, 2px);
+  }
+}
+
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes spinReverse {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
 /* Fluid responsive container */
 .container-custom {
   width: 100%;
